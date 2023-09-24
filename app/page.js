@@ -1,18 +1,18 @@
 'use client'
 
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import NavBar from "./(navigation-components)/NavBar"
-import Welcome from "./(pages)/Welcome"
-import Orders from "./(pages)/Orders"
+import Welcome from "./(main-pages)/Welcome"
+import Orders from "./(main-pages)/Orders"
 import Header from './(navigation-components)/Header'
 import Footer from './(navigation-components)/Footer'
-import Addresses from "./(pages)/Addresses"
-import AccountDetails from "./(pages)/AccountDetails"
-import Deals from "./(pages)/Deals"
-import LikedProducts from "./(pages)/LikedProducts"
-import ReferFriend from "./(pages)/ReferFriend"
-import Help from "./(pages)/Help"
-import Logout from "./(pages)/Logout"
+import Addresses from "./(main-pages)/Addresses"
+import AccountDetails from "./(main-pages)/AccountDetails"
+import Deals from "./(main-pages)/Deals"
+import LikedProducts from "./(main-pages)/LikedProducts"
+import ReferFriend from "./(main-pages)/ReferFriend"
+import Help from "./(main-pages)/Help"
+import Logout from "./(main-pages)/Logout"
 
 export default function Home() {
 

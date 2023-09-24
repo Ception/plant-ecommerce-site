@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import ShopAll from '@/(Header-Components)/ShopAll';
-import Flowers from '@/(Header-Components)/Flowers';
-import Concentrates from '@/(Header-Components)/Concentrates';
-import Edibles from '@/(Header-Components)/Edibles';
-import CBD from '@/(Header-Components)/CBD';
-import Kits from '@/(Header-Components)/Kits';
-import Merchandise from '@/(Header-Components)/Merchandise';
+import ShopAll from '@/(header-components)/ShopAll';
+import Flowers from '@/(header-components)/Flowers';
+import Concentrates from '@/(header-components)/Concentrates';
+import Edibles from '@/(header-components)/Edibles';
+import CBD from '@/(header-components)/CBD';
+import Kits from '@/(header-components)/Kits';
+import Merchandise from '@/(header-components)/Merchandise';
 import { useState } from 'react';
 
 export default function Header() {
@@ -24,6 +24,7 @@ export default function Header() {
   function navigateToHome() {
     router.push('/');
   }
+  
 
   const amount = 0; // TODO: Get amount of items in cart
 
@@ -43,7 +44,7 @@ export default function Header() {
         </div>
       </div>
       <div className="flex justify-center space-x-4 mt-4" >
-        <Link href="#" onMouseEnter={() => setIsShopOpen(true)} className='flex items-center gap-1 font-bold'>
+        <Link href="/shop" onMouseEnter={() => setIsShopOpen(true)} className='flex items-center gap-1 font-bold'>
           <svg width="24" height="24" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
             <path fill="#000000" d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z"/>
           </svg>
