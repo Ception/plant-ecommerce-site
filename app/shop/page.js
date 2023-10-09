@@ -15,44 +15,46 @@ import CBD from "@/(shop-pages)/CBD"
 import Merchandise from "@/(shop-pages)/Merchandise"
 
 export default function Home() {
+  const [currentPageShop, setCurrentPageShop] = useState('Bundles');
 
-    const [currentPageShop, setCurrentPageShop] = useState('Bundles');
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
 
-    return (
-      <div>
-        <Header />
-        <div className="flex justify-center items-center mb-6">
-            <div className="grid grid-cols-3 w-full">
-                <div className="flex justify-center items-center"></div> {/* Empty div to take up the first column */}
-                    <div className="flex justify-center items-center">
-                        <button className="mx-2">Shop All</button>
-                            <span>|</span>
-                        <button className="mx-2">Home</button>
-                    </div>
-                <div className="flex justify-end items-center pr-420">
-                    <button>Filter</button>
-                </div>
-            </div>
-        </div>
-        <div className="flex justify-center items-center min-h-screen">
-          <div className="grid grid-cols-2 grid-rows-3 gap-0 mr-96">
-            <div className="justify-self-center border-2 ml-64"><ShopNavBar setCurrentPageShop={setCurrentPageShop} /></div>
-            <div className="row-span-3 justify-self-center border-2 w-420">
-              {currentPageShop === 'Bundles' && <Bundles />}
-              {currentPageShop === 'Flowers' && <Flowers />}
-              {currentPageShop === 'Concentrates' && <Concentrates />}
-              {currentPageShop === 'Edibles' && <Edibles />}
-              {currentPageShop === 'Deals' && <Deals />}
-              {currentPageShop === 'LikedProducts' && <LikedProducts />}
-              {currentPageShop === 'PreRoll' && <PreRoll />}
-              {currentPageShop === 'CBD' && <CBD />}
-              {currentPageShop === 'Merchandise' && <Merchandise />}
+      <div className="flex justify-center items-center mb-6 w-full px-4">
+          <div className="grid grid-cols-3 w-full">
+              <div className="flex justify-center items-center"></div> {/* Empty div for alignment */}
+              <div className="flex justify-center items-center space-x-2">
+                  <button>Shop All</button>
+                  <span>|</span>
+                  <button>Home</button>
+              </div>
+              <div className="flex justify-end items-center space-x-4">
+                  <button>Filter</button>
               </div>
           </div>
-        </div>
-        <Footer />
       </div>
-    )
-  }
-  
+
+      <div className="flex flex-grow p-4 px-96 space-x-4">
+          <div className="w-64 border-2">
+            <ShopNavBar setCurrentPageShop={setCurrentPageShop} />
+          </div>
+          <div className="flex-grow border-2">
+            {currentPageShop === 'Bundles' && <Bundles />}
+            {currentPageShop === 'Flowers' && <Flowers />}
+            {currentPageShop === 'Concentrates' && <Concentrates />}
+            {currentPageShop === 'Edibles' && <Edibles />}
+            {currentPageShop === 'Deals' && <Deals />}
+            {currentPageShop === 'LikedProducts' && <LikedProducts />}
+            {currentPageShop === 'PreRoll' && <PreRoll />}
+            {currentPageShop === 'CBD' && <CBD />}
+            {currentPageShop === 'Merchandise' && <Merchandise />}
+          </div>
+      </div>
+
+      <Footer />
+    </div>
+  )
+}
+
   
