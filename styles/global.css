@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.shop-all-modal {
+    position: absolute;
+    background-color: #fff;
+    padding: 20px;
+    z-index: 1000;
+    display: none; 
+  }
+  
+
+
