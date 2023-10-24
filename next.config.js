@@ -11,5 +11,8 @@ module.exports = {
   
       return config;
     },
+    experimental: {
+        serverComponentsExternalPackages: ['sequelize'],
+      },
   };
   
