@@ -1,34 +1,45 @@
-import mariadb from 'mariadb';
+'use strict'
+
+import Price from '../../../lib/databases/models/price';
 import { NextResponse } from "next/server";
 
-const CONNECTION_INFO = {
-    host: "localhost", 
-    user: "root", 
-    password: "root", 
-    database: "weed",
-    connectionLimit: 10,
-    acquireTimeout: 20000
- }; 
-
-const pool = mariadb.createPool(CONNECTION_INFO);
+const res = NextResponse;
 
 export async function GET(req) {
-    const res = NextResponse;
+    const { searchParams } = new URL(req.url);
+  const ProductID = searchParams.get("productID");
+  const WeightID = searchParams.get("weightID");
+
+    if (!ProductID || ProductID === '' || ProductID === undefined || ProductID === null) {
+      return res.json({ message: 'ProductID parameter is required.' });
+    }
+    if (!WeightID || WeightID === '' || WeightID === undefined || WeightID === null) {
+      return res.json({ message: 'WeightID parameter is required.' });
+    }
 
     try {
-        let conn = await pool.getConnection();
-        const Query = await conn.query(
-          "SELECT * FROM Product"
-        );
+      const priceData = await getPrice(ProductID, WeightID);
+      if (!priceData || priceData === '' || priceData === undefined || priceData === null) {
+        return res.json({ message: 'Price not found.' });
+      }
+      return res.json({ price: priceData });
+    } catch (err) {
+      console.error(err);
+      return res.json({ message: 'Error fetching potency.' });
+    }
+} 
 
-        console.log("Quey is: ", Query)
-
-        conn.release();
-
-        return res.json({ success: true, message: Query || 'there was an error' });
-
-      } catch (err) {
-        console.error(`"[ERROR] ${err}"`);
-        
-      } 
+async function getPrice(ProductID, WeightID) {
+  try {
+    const productPrice = await Price.findOne({
+      where: { 
+        ProductID,
+        WeightID
+      }
+    });
+    return productPrice;
+  } catch (err) {
+    console.error(err);
+    throw new Error('Error in fetching price');
+  }
 }

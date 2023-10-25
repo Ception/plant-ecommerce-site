@@ -68,7 +68,7 @@ export default function ShopNavBar({ setCurrentPageShop }) {
                 </button>
                     <hr />
                 <button className="flex items-center gap-1 mt-4 mb-2 justify-between cursor-pointer  w-40"onClick={() => setCurrentPageShop("LikedProducts")}>
-                    Liked Products 
+                    LikedProducts 
                     <div className="flex items-center">
                         <p className="text-sm">{likedProductsOptions}</p>
                         <svg width="24" height="24" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">

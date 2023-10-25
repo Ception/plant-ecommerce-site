@@ -33,6 +33,6 @@ async function getWeight(potency) {
     return productPotency;
   } catch (err) {
     console.error(err);
-    throw new Error('Error in fetching weight');
+    throw new Error('Error in fetching potency');
   }
 }

@@ -6,6 +6,7 @@ export default function Flowers() {
   const [productItems, setProductItems] = useState([]);
   const [potencyMap, setPotencyMap] = useState({});
   const [weightMap, setWeightMap] = useState({});
+  const [priceMap, setPriceMap] = useState({});
 
   useEffect(() => {
     fetch("/api/getProducts")
@@ -20,7 +21,11 @@ export default function Flowers() {
         const uniqueWeights = [
           ...new Set(data.product.map((p) => p.Weight))
         ];
-
+        const uniquePricePairs = data.product.map((p) => ({
+          productID: p.ProductID,
+          weightID: p.Weight,
+        }));
+            console.log("uniquePricePairs: ", uniquePricePairs);
         // Fetch and map potencies
         Promise.all(
           uniquePotencies.map((potency) =>
@@ -49,6 +54,23 @@ export default function Flowers() {
               newMap[d.weight.WeightID] = d.weight.Value;
             });
             setWeightMap(newMap);
+          });
+
+        // Fetch and map prices
+        Promise.all(
+          uniquePricePairs.map((pair) =>
+            fetch(`/api/getPrices?productID=${pair.productID}&weightID=${pair.weightID}`)
+          )
+        )
+          .then((responses) => Promise.all(responses.map((res) => res.json())))
+          .then((data) => {
+            const newMap = {};
+            data.forEach((d) => {
+              // Assuming PriceID is a combination of ProductID and WeightID
+              newMap[`${d.price.ProductID}-${d.price.WeightID}`] = d.price.Price;
+            });
+            setPriceMap(newMap);
+            console.log("new map:", newMap);
           });
       });
   }, []);
@@ -99,7 +121,7 @@ export default function Flowers() {
                 : "Loading..."}
             </div>
             <p className="text-xl text-blue-500 font-heading font-medium tracking-tighter">
-              Price
+              Price: {priceMap[`${item.ProductID}-${item.Weight}`] || "Loading..."}
             </p>
           </div>
         ))}
