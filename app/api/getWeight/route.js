@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 const res = NextResponse;
 
 export async function GET(req) {
-    const { searchParams } = new URL(req.url);
+  const { searchParams } = new URL(req.url);
   const weight = searchParams.get("weight");
 
     if (!weight || weight === '' || weight === undefined || weight === null) {

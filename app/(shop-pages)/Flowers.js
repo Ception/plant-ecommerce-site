@@ -9,7 +9,7 @@ export default function Flowers() {
   const [priceMap, setPriceMap] = useState({});
 
   useEffect(() => {
-    fetch("/api/getProducts")
+    fetch("/api/getProducts?category=Flower")
       .then((response) => response.json())
       .then((data) => {
         setProductItems(data.product);
