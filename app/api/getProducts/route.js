@@ -1,6 +1,5 @@
 'use strict'
 
-import { where } from 'sequelize';
 import Product from '../../../lib/databases/models/product';
 import { NextResponse } from "next/server";
 
