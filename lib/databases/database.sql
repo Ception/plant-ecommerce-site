@@ -57,8 +57,18 @@ CREATE TABLE IF NOT EXISTS `Users` (
     `UserName` VARCHAR(20),
     `UserEmail` VARCHAR(50),
     `DOB` DATE NOT NULL,
-    `UserPassword` VARCHAR(50) NOT NULL,
+    `UserPassword` VARCHAR(70) NOT NULL,
     `Verified` TINYINT(1),
     `ResetToken` VARCHAR(50),
     `ResetTokenExpiry` DATE,
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+-- Verification Table
+DROP TABLE IF EXISTS `Verification`;
+CREATE TABLE IF NOT EXISTS `Verification` (
+    `UserID` VARCHAR(50) PRIMARY KEY,
+    `UserToken` VARCHAR(50),
+    `UserTokenExpiry` DATE,
+    `Verified` TINYINT(1) NOT NULL,
+    CONSTRAINT UserIDFK FOREIGN KEY (UserID) REFERENCES Users(UserID),
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;

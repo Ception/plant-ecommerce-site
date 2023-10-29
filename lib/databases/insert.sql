@@ -156,5 +156,12 @@ TRUNCATE TABLE `Potency`;
 -- Truncate table `Weight`
 TRUNCATE TABLE `Weight`;
 
+ALTER TABLE `Verification` DROP FOREIGN KEY `UserIDFK`;
+
+-- Truncate table `Users`
+TRUNCATE TABLE `Users`;
+
+ALTER TABLE `Verification` ADD CONSTRAINT `UserIDFK` FOREIGN KEY (`UserID`) REFERENCES `Users`(`UserID`);
+
 -- Re-add the foreign key constraint
 ALTER TABLE `Price` ADD CONSTRAINT `ProductIDFK` FOREIGN KEY (`ProductID`) REFERENCES `Product`(`ProductID`);
