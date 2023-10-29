@@ -10,26 +10,16 @@ INSERT INTO Potency (PotencyID, Value) VALUES
 (1001, 'AAA+'),
 (1002, 'AAAA');
 
-INSERT INTO Product (ProductID, Name, Description, Strain, Weight, Potency, THC_Levels, CBD_Levels, Category, Subcategory, Rating, Available, QTY) VALUES
-('Prod1', 'Product 1', 'Description 1', 'Indica', 1000, 1000, 20, 1, 'Flower', 'Indica', 4, 1, 10),
-('Prod2', 'Product 2', 'Description 2', 'Sativa', 1001, 1001, 18, 2, 'Flower', 'Sativa', 5, 1, 20),
-('Prod3', 'Product 3', 'Description 3', 'Hybrid', 1002, 1002, 22, 3, 'Concentrate', 'Wax', 3, 1, 5);
 
-INSERT INTO Price (PriceID, ProductID, WeightID, Price) VALUES
-('Price1', 'Prod1', 1000, 10.99),
-('Price2', 'Prod2', 1001, 12.99),
-('Price3', 'Prod3', 1002, 20.00);
 
 
 
 
 -- Product Table for complete testing:
-INSERT INTO YourTableName 
-(ProductID, Name, Description, ImageID, Strain, Weight, Potency, THC_Levels, CBD_Levels, Category, Subcategory, Rating, Available, QTY) 
-VALUES 
-('Prod4', 'Bundle Product 1', 'Description 4', NULL, 'Indica', 1000, 1000, 21, 2, 'Bundles', 'Bundle Subcat 1', 4, 1, 15),
-('Prod5', 'Bundle Product 2', 'Description 5', NULL, 'Sativa', 1001, 1001, 19, 3, 'Bundles', 'Bundle Subcat 2', 5, 1, 25),
-('Prod6', 'Bundle Product 3', 'Description 6', NULL, 'Hybrid', 1002, 1002, 23, 4, 'Bundles', 'Bundle Subcat 3', 3, 1, 10);
+INSERT INTO Product (ProductID, Name, Description, Strain, Weight, Potency, THC_Levels, CBD_Levels, Category, Subcategory, Rating, Available, QTY) VALUES
+('Prod1', 'Product 1', 'Description 1', 'Indica', 1000, 1000, 20, 1, 'Flower', 'Indica', 4, 1, 10),
+('Prod2', 'Product 2', 'Description 2', 'Sativa', 1001, 1001, 18, 2, 'Flower', 'Sativa', 5, 1, 20),
+('Prod3', 'Product 3', 'Description 3', 'Hybrid', 1002, 1002, 22, 3, 'Flower', 'Hybrid', 3, 1, 5);
 
 INSERT INTO product 
 (ProductID, Name, Description, ImageID, Strain, Weight, Potency, THC_Levels, CBD_Levels, Category, Subcategory, Rating, Available, QTY) 
@@ -88,7 +78,12 @@ VALUES
 ('Prod23', 'PreRoll Product 2', 'Description 23', NULL, 'Sativa', 1001, 1001, 18, 18, 'PreRoll', 'Sativa PreRoll', 5, 1, 20),
 ('Prod24', 'PreRoll Product 3', 'Description 24', NULL, 'Hybrid', 1002, 1002, 22, 19, 'PreRoll', 'Hybrid PreRoll', 3, 1, 5);
 
--- Price table for complete testing
+-- Prices for Flower Products
+INSERT INTO Price (PriceID, ProductID, WeightID, Price) VALUES
+('Price1', 'Prod1', 1000, 10.99),
+('Price2', 'Prod2', 1001, 12.99),
+('Price3', 'Prod3', 1002, 20.00);
+
 -- Prices for Bundle Products
 INSERT INTO Price
 (PriceID, ProductID, WeightID, Price)
@@ -144,3 +139,22 @@ VALUES
 ('Price22', 'Prod22', 1000, 8.99),
 ('Price23', 'Prod23', 1001, 10.99),
 ('Price24', 'Prod24', 1002, 18.00);
+
+-- To drop all values from tables
+-- Drop foreign key constraints
+ALTER TABLE `Price` DROP FOREIGN KEY `ProductIDFK`;
+
+-- Truncate table `Price`
+TRUNCATE TABLE `Price`;
+
+-- Truncate table `Product`
+TRUNCATE TABLE `Product`;
+
+-- Truncate table `Potency`
+TRUNCATE TABLE `Potency`;
+
+-- Truncate table `Weight`
+TRUNCATE TABLE `Weight`;
+
+-- Re-add the foreign key constraint
+ALTER TABLE `Price` ADD CONSTRAINT `ProductIDFK` FOREIGN KEY (`ProductID`) REFERENCES `Product`(`ProductID`);
