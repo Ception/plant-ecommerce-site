@@ -50,3 +50,15 @@ CREATE TABLE IF NOT EXISTS `Price` (
     CONSTRAINT WeightIDFK FOREIGN KEY (WeightID) REFERENCES Weight(WeightID),
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
+-- Users Table
+DROP TABLE IF EXISTS `Users`;
+CREATE TABLE IF NOT EXISTS `Users` (
+    `UserID` VARCHAR(50) PRIMARY KEY,
+    `UserName` VARCHAR(20),
+    `UserEmail` VARCHAR(50),
+    `DOB` DATE NOT NULL,
+    `UserPassword` VARCHAR(50) NOT NULL,
+    `Verified` TINYINT(1),
+    `ResetToken` VARCHAR(50),
+    `ResetTokenExpiry` DATE,
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
