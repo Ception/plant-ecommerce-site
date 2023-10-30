@@ -55,18 +55,24 @@ export async function POST(req) {
     const axiosPromises = [];
 
     for (let i = 0; i < itemIDs.length; i++) {
-      const axiosPromise = axios.post("http://localhost:3000/api/order/addOrderItem", {
-        orderID: orderID,
-        productID: itemIDs[i],
-        weightID: weightIDs[i],
-      });
-      
+      const axiosPromise = axios.post(
+        "http://localhost:3000/api/order/addOrderItem",
+        {
+          orderID: orderID,
+          productID: itemIDs[i],
+          weightID: weightIDs[i],
+        }
+      );
+
       axiosPromises.push(axiosPromise);
     }
 
     await Promise.all(axiosPromises);
 
-    const priceResponse = await axios.post("http://localhost:3000/api/order/setOrderPrice", {orderID: orderID});
+    const priceResponse = await axios.post(
+      "http://localhost:3000/api/order/setOrderPrice",
+      { orderID: orderID }
+    );
 
     console.log("priceResponse: ", priceResponse.status);
 

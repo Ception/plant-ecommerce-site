@@ -13,7 +13,6 @@ export async function POST(req) {
   const orderPriceID = uuid();
   const orderID = data.orderID;
 
-
   if (!orderID || orderID === "" || orderID === undefined || orderID === null) {
     return res.json({ message: "orderID parameter is required." });
   }
@@ -23,7 +22,9 @@ export async function POST(req) {
   var finalPrices = [];
 
   for (let i = 0; i < PriceIDs.length; i++) {
-    const returnedPrice = await Price.findOne({where: {PriceID: PriceIDs[i]}});
+    const returnedPrice = await Price.findOne({
+      where: { PriceID: PriceIDs[i] },
+    });
     finalPrices.push(returnedPrice.dataValues.Price);
   }
 
@@ -33,38 +34,31 @@ export async function POST(req) {
   }
 
   try {
-
     const priceResponse = await OrderPrice.create({
-        OrderPriceID: orderPriceID,
-        OrderID: orderID,
-        TotalPrice: totalPrice,
+      OrderPriceID: orderPriceID,
+      OrderID: orderID,
+      TotalPrice: totalPrice,
     });
 
-
     return res.json({ "Server Response": priceResponse });
-
   } catch (err) {
     console.error(err);
     return res.json({ message: "Error fetching price." });
   }
-
-
 }
 
 async function getPriceIDs(orderID) {
+  try {
+    const response = await OrderLine.findAll({
+      where: {
+        OrderID: orderID,
+      },
+    });
 
-    try {
-        const response = await OrderLine.findAll({
-            where: {
-                OrderID: orderID
-            }
-        });
-
-        const priceIDs = response.map(orderLine => orderLine.dataValues.PriceID);
-        return priceIDs;
-    } catch(e) {
-        console.error(e);
-        throw new Error('Error in fetching priceIDs');
-    }
-
+    const priceIDs = response.map((orderLine) => orderLine.dataValues.PriceID);
+    return priceIDs;
+  } catch (e) {
+    console.error(e);
+    throw new Error("Error in fetching priceIDs");
+  }
 }
