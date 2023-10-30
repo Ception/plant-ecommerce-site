@@ -1,18 +1,42 @@
 
 -- Inserted Data for Testing
-INSERT INTO Weight (WeightID, Value) VALUES
-(1000, '1g'),
-(1001, '1g, 3.5gs'),
-(1002, '1g, 7gs');
+INSERT INTO weight (WeightID, Value) VALUES
+(1003, '1g, 14gs'),
+(1004, '1g, 1oz'),
+(1005, '1g, 3.5gs, 7gs'),
+(1006, '1g, 3.5gs, 14gs'),
+(1007, '1g, 3.5gs, 1oz'),
+(1008, '1g, 7gs, 14gs'),
+(1009, '1g, 7gs, 1oz'),
+(1010, '1g, 14gs, 1oz'),
+(1011, '1g, 3.5gs, 7gs, 14gs'),
+(1012, '1g, 3.5gs, 7gs, 1oz'),
+(1013, '1g, 3.5gs, 14gs, 1oz'),
+(1014, '1g, 7gs, 14gs, 1oz'),
+(1015, '1g, 3.5gs, 7gs, 14gs, 1oz'),
+(1016, '3.5gs'),
+(1017, '3.5gs, 7gs'),
+(1018, '3.5gs, 14gs'),
+(1019, '3.5gs, 1oz'),
+(1020, '3.5gs, 7gs, 14gs'),
+(1021, '3.5gs, 7gs, 1oz'),
+(1022, '3.5gs, 14gs, 1oz'),
+(1023, '3.5gs, 7gs, 14gs, 1oz'),
+(1024, '7gs'),
+(1025, '7gs, 14gs'),
+(1026, '7gs, 1oz'),
+(1027, '7gs, 14gs, 1oz'),
+(1028, '14gs'),
+(1029, '14gs, 1oz'),
+(1030, '1oz');
 
 INSERT INTO Potency (PotencyID, Value) VALUES
 (1000, 'AAA'),
 (1001, 'AAA+'),
-(1002, 'AAAA');
-
-
-
-
+(1002, 'AAAA'),
+(1003, 'AAAA+'),
+(1004, 'AA'),
+(1005, 'AAA+');
 
 
 -- Product Table for complete testing:
@@ -140,28 +164,3 @@ VALUES
 ('Price23', 'Prod23', 1001, 10.99),
 ('Price24', 'Prod24', 1002, 18.00);
 
--- To drop all values from tables
--- Drop foreign key constraints
-ALTER TABLE `Price` DROP FOREIGN KEY `ProductIDFK`;
-
--- Truncate table `Price`
-TRUNCATE TABLE `Price`;
-
--- Truncate table `Product`
-TRUNCATE TABLE `Product`;
-
--- Truncate table `Potency`
-TRUNCATE TABLE `Potency`;
-
--- Truncate table `Weight`
-TRUNCATE TABLE `Weight`;
-
-ALTER TABLE `Verification` DROP FOREIGN KEY `UserIDFK`;
-
--- Truncate table `Users`
-TRUNCATE TABLE `Users`;
-
-ALTER TABLE `Verification` ADD CONSTRAINT `UserIDFK` FOREIGN KEY (`UserID`) REFERENCES `Users`(`UserID`);
-
--- Re-add the foreign key constraint
-ALTER TABLE `Price` ADD CONSTRAINT `ProductIDFK` FOREIGN KEY (`ProductID`) REFERENCES `Product`(`ProductID`);

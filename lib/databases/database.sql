@@ -88,3 +88,10 @@ CREATE TABLE IF NOT EXISTS `OrderLine` (
     CONSTRAINT `PriceIDFK_OrderLine` FOREIGN KEY (`PriceID`) REFERENCES `Price`(`PriceID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
+-- OrderLine Table
+CREATE TABLE IF NOT EXISTS `OrderPrice` (
+    `OrderPriceID` VARCHAR(70) PRIMARY KEY,
+    `OrderID` VARCHAR(70) NOT NULL,
+    `TotalPrice` DECIMAL(10, 2) NOT NULL,
+    CONSTRAINT `OrderIDFK_OrderPrice` FOREIGN KEY (`OrderID`) REFERENCES `Orders`(`OrderID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
