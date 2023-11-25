@@ -1,6 +1,9 @@
 
 -- Inserted Data for Testing
 INSERT INTO weight (WeightID, Value) VALUES
+(1000, '1g,'),
+(1001, '1g, 3.5gs'),
+(1002, '1g, 7gs'),
 (1003, '1g, 14gs'),
 (1004, '1g, 1oz'),
 (1005, '1g, 3.5gs, 7gs'),
